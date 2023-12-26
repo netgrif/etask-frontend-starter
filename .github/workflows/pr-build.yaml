@@ -1,0 +1,21 @@
+name: PR Test Build
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: npm i --legacy-peer-deps
+
+      - name: Test
+        run: npm run build && npm run lint

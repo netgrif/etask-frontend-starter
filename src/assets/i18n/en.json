@@ -1,0 +1,32 @@
+{
+  "title": "ETask",
+  "views": {
+    "console": "Konzola"
+  },
+  "cases": {
+    "allCases": "All Cases",
+    "myCases": "My Cases"
+  },
+  "tasks": {
+    "allTasks": "All Tasks",
+    "myTasks": "My Tasks"
+  },
+  "dashboard": {
+    "tasks": "task",
+    "cases": "cases"
+  },
+  "menu": {
+    "views": "Views",
+    "archive": "Archive",
+    "settings": "Settings",
+    "root-folders": "Categories"
+  },
+  "workflow": {
+    "publicUrl": "Public URL",
+    "goToPublicView": "Go to public view"
+  },
+  "snackbar": {
+    "filterDeleteSuccess": "Filter deleted successfully. Refreshing view.",
+    "publicUrlCopied": "Public URL of process copied"
+  }
+}

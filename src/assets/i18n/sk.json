@@ -1,0 +1,32 @@
+{
+  "title": "ETask",
+  "views": {
+    "console": "Konzola"
+  },
+  "cases": {
+    "allCases": "Všetky prípady",
+    "myCases": "Moje prípady"
+  },
+  "tasks": {
+    "allTasks": "Všetky úlohy",
+    "myTasks": "Moje úlohy"
+  },
+  "dashboard": {
+    "tasks": "úloh",
+    "cases": "prípadov"
+  },
+  "menu": {
+    "views": "Zobrazenia",
+    "archive": "Archív",
+    "settings": "Nastavenia",
+    "root-folders": "Kategórie"
+  },
+  "workflow": {
+    "publicUrl": "Verejná URL",
+    "goToPublicView": "Choď na verejnú obrazovku"
+  },
+  "snackbar": {
+    "filterDeleteSuccess": "Filter úspešne vymazaný. Aktualizujem zobrazenie.",
+    "publicUrlCopied": "Verejná URL procesu skopírovaná"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "title": "ETask",
+  "views": {
+    "console": "Konzola"
+  },
+  "cases": {
+    "allCases": "Alle Fälle",
+    "myCases": "Meine Fälle"
+  },
+  "tasks": {
+    "allTasks": "Alle Aufgaben",
+    "myTasks": "Meine Aufgaben"
+  },
+  "dashboard": {
+    "tasks": "Aufgaben",
+    "cases": "Fälle"
+  },
+  "menu": {
+    "views": "Ansichten",
+    "archive": "Archiv",
+    "settings": "Einstellungen",
+    "root-folders": "Kategorien"
+  },
+  "workflow": {
+    "publicUrl": "Öffentliche URL",
+    "goToPublicView": "Zur öffentlichen Ansicht gehen"
+  },
+  "snackbar": {
+    "filterDeleteSuccess": "Filter erfolgreich gelöscht. Ansicht wird aktualisiert.",
+    "publicUrlCopied": "Öffentliche URL des kopierten Prozesses"
+  }
+}

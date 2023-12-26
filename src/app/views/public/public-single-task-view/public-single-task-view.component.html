@@ -1,0 +1,47 @@
+<div class="task-tab-background full-height">
+  <div fxLayout="column" fxLayoutAlign="start stretch" class="content-margin full-height">
+    <nc-header [hidden]='hidden' #header type="task" class="task-panel-padding-mini"></nc-header>
+    <nc-single-task [task$]="task$" [loading$]="loading$" [selectedHeaders$]="selectedHeaders$"
+                    (taskEvent)="logEvent($event)"
+                    [pageHeader]='pageHeader' [pageFooter]='pageFooter' [actionButtonTemplates]='[finishButton]'
+                    [actionRowJustifyContent]='"center"' fxFlex></nc-single-task>
+  </div>
+</div>
+
+<ng-template #finishButton let-finish="finish">
+  <div *ngIf="enableFinishButton" class="public-button-padding">
+    <button mat-raised-button color="primary" class="public-button"
+            (click)="finish();">
+      <span>{{ 'tasks.view.finish' | translate }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #pageHeader>
+  <div *ngIf="enablePageHeader">
+    <div>
+      <img src="https://netgrif.com/wp-content/uploads/2020/11/netgrif_full_grey.svg" alt="logo" class="logoimg">
+      <mat-divider class="upper-divider"></mat-divider>
+    </div>
+    <mat-card class="upper-card">
+      <span class="upper-card-title"><strong>{{ (task$ | async)?.task.title }}</strong></span>
+    </mat-card>
+  </div>
+</ng-template>
+
+<ng-template #pageFooter>
+  <div *ngIf="enablePageFooter">
+    <mat-toolbar color="primary" class="footer-custom">
+      <span>FOOTER</span>
+    </mat-toolbar>
+  </div>
+</ng-template>
+
+<ng-template #noTaskSection>
+  <mat-icon color='accent'>check_box</mat-icon>
+  <span class='font-size-20'>{{ 'tasks.view.noTasksSatisfyingThisFilter' | translate }}</span>
+  <button mat-raised-button color="primary" class="public-button"
+          (click)="newCase();">
+    <span>{{ 'singleTask.createNewCaseButtonTitle' | translate }}</span>
+  </button>
+</ng-template>

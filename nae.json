@@ -1,0 +1,273 @@
+{
+  "$schema": "node_modules/@netgrif/components-core/src/schema/nae-schema.json",
+  "extends": "nae-default",
+  "autoResolveBackendUrl": false,
+  "providers": {
+    "auth": {
+      "address": "http://localhost:8080/api",
+      "authentication": "Basic",
+      "endpoints": {
+        "login": "/auth/login",
+        "logout": "/auth/logout",
+        "signup": "/auth/signup"
+      },
+      "sessionBearer": "X-Auth-Token"
+    },
+    "resources": [
+      {
+        "name": "main",
+        "address": "http://localhost:8080/api"
+      },
+      {
+        "name": "case",
+        "address": "http://localhost:8080/api"
+      },
+      {
+        "name": "task",
+        "address": "http://localhost:8080/api"
+      },
+      {
+        "name": "petrinet",
+        "address": "http://localhost:8080/api"
+      },
+      {
+        "name": "user",
+        "address": "http://localhost:8080/api"
+      },
+      {
+        "name": "impersonation",
+        "address": "http://localhost:8080/api"
+      },
+      {
+        "name": "uri",
+        "address": "http://localhost:8080/api"
+      }
+    ]
+  },
+  "views": {
+    "public-view": {
+      "layout": {
+        "name": "publicTaskView",
+        "params": {
+          "allowedNets": []
+        }
+      },
+      "component": {
+        "class": "PublicTaskViewComponent",
+        "from": "./views/public-task-view/public-task-view.component"
+      },
+      "access": "public",
+      "navigation": false,
+      "routing": {
+        "path": "process/:petriNetId/:caseId"
+      }
+    },
+    "public-view-case": {
+      "layout": {
+        "name": "publicTaskView",
+        "params": {
+          "allowedNets": []
+        }
+      },
+      "component": {
+        "class": "PublicTaskViewComponent",
+        "from": "./views/public-task-view/public-task-view.component"
+      },
+      "access": "public",
+      "navigation": false,
+      "routing": {
+        "path": "process/:petriNetId"
+      }
+    },
+    "public-view-single-task": {
+      "component": {
+        "class": "PublicSingleTaskViewComponent",
+        "from": "./views/public-view/public-single-task-view/public-single-task-view.component"
+      },
+      "layout": {
+        "name": "publicTaskView",
+        "params": {
+          "enableHeader": false,
+          "enableFooter": false,
+          "enableFinishButton": true
+        }
+      },
+      "access": "public",
+      "navigation": false,
+      "routing": {
+        "path": "process/:petriNetId/:caseId/:transitionId"
+      }
+    },
+    "public-view-workflow": {
+      "layout": {
+        "name": "publicWorkflowView",
+        "params": {
+          "allowedNets": []
+        }
+      },
+      "component": {
+        "class": "PublicWorkflowViewComponent",
+        "from": "./views/public-workflow-view/public-workflow-view.component"
+      },
+      "access": "public",
+      "navigation": false,
+      "routing": {
+        "path": "process"
+      }
+    },
+    "public-view-resolver": {
+      "layout": {
+        "name": "publicResolverView",
+        "params": {
+          "allowedNets": []
+        }
+      },
+      "component": {
+        "class": "PublicResolverComponent",
+        "from": "./views/public-resolver/public-resolver.component"
+      },
+      "access": "public",
+      "navigation": false,
+      "routing": {
+        "path": "public-resolver"
+      }
+    },
+    "login": {
+      "layout": {
+        "name": "login",
+        "componentName": "Login"
+      },
+      "component": {
+        "class": "LoginComponent",
+        "from": "./views/login/login.component"
+      },
+      "access": "public",
+      "navigation": false,
+      "routing": {
+        "path": "login"
+      }
+    },
+    "dashboard": {
+      "component": {
+        "class": "DashboardComponent",
+        "from": "./views/dashboard/dashboard/dashboard.component"
+      },
+      "access": "private",
+      "routing": {
+        "path": "dashboard"
+      }
+    },
+    "double-drawer": {
+      "layout": {
+        "name": "sidenavView",
+        "componentName": "Sidenav",
+        "params": {
+          "user": true,
+          "quickPanel": true,
+          "navigation": true
+        }
+      },
+      "component": {
+        "class": "SidenavComponent",
+        "from": "./views/side-nav/side-nav-sidenav-view.component"
+      },
+      "access": "private",
+      "navigation": false,
+      "routing": {
+        "path": "portal"
+      },
+      "children": {
+        "group-navigation-double-drawer-outlet": {
+          "layout": {
+            "name": "groupNavigation"
+          },
+          "navigation": false,
+          "routing": {
+            "path": "filter"
+          }
+        },
+        "workflows": {
+          "component": {
+            "class": "WorkflowViewComponent",
+            "from": "./views/workflow/workflow-view/workflow-view.component"
+          },
+          "access": {
+            "authority": "ROLE_ADMIN"
+          },
+          "navigation": {
+            "icon": "linear_scale",
+            "title": "Workflow",
+            "hidden": true,
+            "translate": true
+          },
+          "routing": {
+            "path": "workflows"
+          }
+        },
+        "console": {
+          "component": {
+            "class": "RoleAssignmentComponent",
+            "from": "@netgrif/components"
+          },
+          "access": "private",
+          "navigation": {
+            "icon": "developer_board",
+            "title": "Konzola",
+            "hidden": true,
+            "translate": true
+          },
+          "routing": {
+            "path": "console"
+          }
+        }
+      }
+    }
+  },
+  "theme": {
+    "name": "default",
+    "pallets": {
+      "light": {
+        "primary": "#2196F3",
+        "secondary": "#FFC107",
+        "warn": "red"
+      }
+    }
+  },
+  "assets": [
+    "src/assets"
+  ],
+  "filters": {
+    "all-cases": {
+      "title": "All Cases",
+      "access": "public",
+      "query": {},
+      "type": "Case"
+    }
+  },
+  "i18n": [
+    "sk-SK",
+    "de-DE",
+    "en-US"
+  ],
+  "services": {
+    "auth": {
+      "logoutRedirect": "login",
+      "loginRedirect": "login"
+    },
+    "routing": {
+      "defaultRedirect": "dashboard"
+    },
+    "log": {
+      "level": "DEBUG",
+      "logWithDate": true,
+      "serializeExtraParams": true,
+      "includeLogLevel": true,
+      "publishers": [
+        "console"
+      ]
+    },
+    "groupNavigation": {
+      "groupNavigationRoute": "filter"
+    }
+  }
+}

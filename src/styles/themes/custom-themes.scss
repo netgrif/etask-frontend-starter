@@ -1,0 +1,110 @@
+@use '@angular/material' as mat;
+@import 'node_modules/@netgrif/components/nae-theme';
+
+$typography: mat.define-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat.define-typography-level(32px, 48px, 700)
+);
+
+@include mat.core($typography);
+
+$etask-blue: (
+  50: #E0E5EB,
+  100: #B3BDCE,
+  200: #8092AD,
+  300: #4D668C,
+  400: #264574,
+  500: #00245B,
+  600: #002053,
+  700: #001B49,
+  800: #001640,
+  900: #000D2F,
+  A100: #687FFF,
+  A200: #3554FF,
+  A400: #0229FF,
+  A700: #0024E7,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$etask-pink: (
+  50: #FDECED,
+  100: #FBCFD3,
+  200: #F8AFB5,
+  300: #F58E97,
+  400: #F37681,
+  500: #F15E6B,
+  600: #EF5663,
+  700: #ED4C58,
+  800: #EB424E,
+  900: #E7313C,
+  A100: #FFFFFF,
+  A200: #FFF7F8,
+  A400: #FFC4C7,
+  A700: #FFABAF,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$etask-primary: mat.define-palette($etask-blue);
+$etask-accent: mat.define-palette($etask-pink);
+$etask-warn: mat.define-palette(mat.$red-palette);
+
+$etask-theme: mat.define-light-theme($etask-primary, $etask-accent, $etask-warn);
+
+@include mat.all-component-themes($etask-theme);
+//@include covalent-theme($theme, $typography);
+
+@include nae-lib-theme($etask-theme, $typography);
+$primary: map-get($etask-theme, primary);
+$secondary: map-get($etask-theme, accent);
+.card-icon {
+  color: mat.get-color-from-palette($primary);
+}
+
+.accent-text-color {
+  color: mat.get-color-from-palette($secondary) !important;
+}
+
+body {
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: white;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #82A5DD;
+  }
+}
+
+
+

@@ -1,0 +1,59 @@
+<mat-toolbar color="primary" class="fixed-toolbar">
+  <mat-toolbar-row fxLayout="row">
+    <div fxFlex></div>
+    <div fxFlex fxLayoutAlign="center center">
+      <div class="weight-text" fxFlex fxHide.gt-xs="false" fxHide.lt-md="true" fxLayout="row"
+           fxLayoutAlign="center center">
+        {{ 'title' | translate }}
+      </div>
+    </div>
+    <div fxFlex fxLayoutAlign="end center">
+      <div *ngIf="!isImpersonating()">
+        {{ loggedUser.fullName }}
+      </div>
+      <!--            <div *ngIf="isImpersonating()">-->
+      <!--                {{loggedUser.fullName}} <span-->
+      <!--                class="info-text">({{'side-menu.impersonation.impersonating' | translate}}</span> {{loggedUser.getSelfOrImpersonated().fullName}}-->
+      <!--                <span class="info-text">)</span>-->
+      <!--            </div>-->
+      <div fxLayoutAlign="end">
+        <button mat-button (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>{{ 'toolbar.menu.logout' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="cards-container" fxLayout="row wrap" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let node of nodes" class="dashboard-card"
+       (click)="openNode(node)">
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center" class="card-content" (click)="openNode(node)">
+      <mat-icon class="card-icon">{{ getNodeIcon(node) }}</mat-icon>
+      <div class="card-main-text">{{ node.name.replaceAll("_", " ") }}</div>
+      <div *ngIf="areCountersLoaded()" class="card-secondary-text counter"
+           [ngClass]="{'accent-text-color': count(node.name) !== 0}">
+        {{ count(node.name) }} {{ 'dashboard.cases' | translate }}
+      </div>
+      <div *ngIf="!areCountersLoaded()" class="card-secondary-text counter">
+        <mat-spinner color="accent" diameter="20"></mat-spinner>
+      </div>
+    </mat-card-content>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let view of customViews" class="dashboard-card"
+       (click)="openView(view)">
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center" class="card-content" (click)="openView(view)">
+      <mat-icon class="card-icon">{{ view.navigation.icon }}</mat-icon>
+      <div class="card-main-text">{{ view.navigation.title }}</div>
+      <div *ngIf="isCountLoaded(view)" class="card-secondary-text counter"
+           [ngClass]="{'accent-text-color': countView(view) !== 0}">
+        {{ countView(view) }} {{ 'dashboard.tasks' | translate }}
+      </div>
+      <mat-spinner *ngIf="!isCountLoaded(view)" color="accent" diameter="20"></mat-spinner>
+    </mat-card-content>
+  </div>
+</div>
+

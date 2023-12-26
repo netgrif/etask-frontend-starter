@@ -57,7 +57,7 @@ application to localhost. Port of the application can be changed using ```--port
 #### NAE.json
 
 The frontend application consist of side menu and a views for the application. There are some predefined views for
-processes, cases, tasks and user management. Side menu items are loaded from the [eTask application server](https://github.com/netgrif/etask-backend-starter). 
+processes, cases, tasks and user management. Side menu items are loaded from the [eTask application server](https://github.com/netgrif/etask-backend-starter).
 
 To configure NAE application more easily the libraries use file ```nae.json``` that is placed in root of the project.
 ```nae.json``` defines global application configuration like urls to backend resources, services' configurations,
@@ -68,7 +68,7 @@ routing and views.
 eTask frontend application build is distributed with every release. You can download is as a [release artifact](https://github.com/netgrif/etask-frontend-starter/releases/latest),
 extract it from the zip archive and run it in web server of your choice.
 Content of the release artifact are only static files to be served be a web server and run in the client browser.
-The project includes example of [nginx configuration](default.nginx.conf). 
+The project includes example of [nginx configuration](default.nginx.conf).
 
 ### Run as a container
 
@@ -90,3 +90,13 @@ services:
     ports:
       - "80:80"
 ```
+
+#### Configuration
+
+The application can be configured using environment variables. Available variables are in table below:
+
+| Variable         | Type    | Default | Description                                                                                                       |
+|------------------|---------|---------|-------------------------------------------------------------------------------------------------------------------|
+| AUTO_RESOLVE_URL | Boolean | true    | Enable/Disable auto-resolving URL of eTask application server based on domain that this app is run.               |
+| LOG_LEVEL        | String  | DEBUG   | Log level of frontend logger. Default logger pushes to browser console.  Allowed values: DEBUG, INFO, WARN, ERROR |
+

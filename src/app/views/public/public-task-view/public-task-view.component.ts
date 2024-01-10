@@ -37,7 +37,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {combineLatest} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {publicBaseFilterFactory} from '../factories/etask-search-factory';
-import {ETaskTaskResourceService} from '../service/e-task-task-resource.service';
 
 const localAllowedNetsServiceFactory = (factory: AllowedNetsServiceFactory, route: ActivatedRoute) => {
   const array = [];
@@ -60,7 +59,7 @@ const taskResourceServiceFactory = (userService: UserService, sessionService: Se
                                     logger: LoggerService, provider: ResourceProvider, config: ConfigurationService,
                                     fieldConverter: FieldConverterService, redirectService: RedirectService) => {
   return publicFactoryResolver(userService, sessionService, authService, router, publicResolverService,
-    new ETaskTaskResourceService(provider, config, fieldConverter, logger),
+    new TaskResourceService(provider, config, fieldConverter, logger),
     new PublicTaskResourceService(provider, config, fieldConverter, logger), redirectService);
 };
 

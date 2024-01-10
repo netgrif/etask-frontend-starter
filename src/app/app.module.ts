@@ -29,7 +29,6 @@ import {
   ConfigurationService,
   GroupNavigationComponentResolverService,
   MaterialModule,
-  TaskResourceService,
   TranslateLibModule,
   UriResourceService,
   ViewService,
@@ -52,7 +51,6 @@ import {PublicResolverComponent} from './views/public/public-resolver/public-res
 import {PublicSingleTaskViewComponent} from './views/public/public-single-task-view/public-single-task-view.component';
 import {PublicTaskViewComponent} from './views/public/public-task-view/public-task-view.component';
 import {PublicWorkflowViewComponent} from './views/public/public-workflow-view/public-workflow-view.component';
-import {ETaskTaskResourceService} from './views/public/service/e-task-task-resource.service';
 import {SideNavCasesCaseViewComponent} from './views/side-nav/cases/side-nav-cases-case-view.component';
 import {EmptyViewComponent} from './views/side-nav/emptyView/empty-view.component';
 import {ETaskDoubleDrawerComponent} from './views/side-nav/etask-double-drawer/e-task-double-drawer.component';
@@ -124,7 +122,6 @@ import {WorkflowViewComponent} from './views/workflow/workflow-view/workflow-vie
   providers: [
     {provide: ConfigurationService, useClass: EtaskFrontendConfigurationService},
     {provide: ViewService, useClass: EtaskFrontendViewService},
-    {provide: TaskResourceService, useClass: ETaskTaskResourceService},
     {provide: UriResourceService, useClass: EtaskUriResourceService},
     {provide: GroupNavigationComponentResolverService, useClass: EtaskGroupNavigationComponentResolverService},
   ],

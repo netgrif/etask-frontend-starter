@@ -17,6 +17,7 @@
   },
   "menu": {
     "views": "Zobrazenia",
+    "root-views": "Zobrazenia",
     "archive": "Archív",
     "settings": "Nastavenia",
     "root-folders": "Kategórie"

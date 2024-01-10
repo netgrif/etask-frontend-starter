@@ -17,6 +17,7 @@
   },
   "menu": {
     "views": "Ansichten",
+    "root-views": "Ansichten",
     "archive": "Archiv",
     "settings": "Einstellungen",
     "root-folders": "Kategorien"

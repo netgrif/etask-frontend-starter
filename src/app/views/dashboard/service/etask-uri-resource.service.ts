@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {ConfigurationService, ResourceProvider, UriNodeResource, UriResourceService} from '@netgrif/components-core';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ConfigurationService, ResourceProvider, UriNodeResource, UriResourceService } from '@netgrif/components-core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +40,7 @@ export class EtaskUriResourceService extends UriResourceService {
   }
 }
 
-declare interface Counter {
+export declare interface Counter {
   counts: Map<string, number>;
 }
 

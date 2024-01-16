@@ -1,16 +1,24 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HeaderComponentModule, PanelComponentModule} from '@netgrif/components';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponentModule, NavigationComponentModule, PanelComponentModule } from '@netgrif/components';
 import {
-  AuthenticationMethodService,
   ConfigurationService,
-  FilterType,
   MaterialModule,
+  MockUserPreferenceService,
+  MockUserService,
   NAE_TAB_DATA,
+  OverflowService,
+  SessionIdleTimerService,
   SimpleFilter,
+  TestConfigurationService,
+  TestMockDependenciesModule,
+  UserPreferenceService,
+  UserService,
 } from '@netgrif/components-core';
-import {EtaskFrontendConfigurationService} from '../../../etask-frontend-configuration.service';
-import {SideNavTasksTaskViewComponent} from './side-nav-tasks-task-view.component';
+import { SideNavTasksTaskViewComponent } from './side-nav-tasks-task-view.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { MockSessionIdleTimerService } from '../../dashboard/service/mock-session-idle-timer.service';
 
 describe('SideNavTasksTaskViewComponent', () => {
   let component: SideNavTasksTaskViewComponent;
@@ -23,11 +31,26 @@ describe('SideNavTasksTaskViewComponent', () => {
         HeaderComponentModule,
         PanelComponentModule,
         BrowserAnimationsModule,
+        NavigationComponentModule,
+        TestMockDependenciesModule,
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([]),
       ],
       providers: [
-        {provide: NAE_TAB_DATA, useValue: {baseFilter: new SimpleFilter('id', FilterType.TASK, {})}},
-        AuthenticationMethodService,
-        {provide: ConfigurationService, useClass: EtaskFrontendConfigurationService},
+        {
+          provide: NAE_TAB_DATA, useValue: {
+            baseFilter: SimpleFilter.emptyTaskFilter(),
+            allowedNets: [],
+            tabUniqueId: '1',
+            tabSelected$: of(true),
+            tabClosed$: of()
+          }
+        },
+        OverflowService,
+        { provide: ConfigurationService, useClass: TestConfigurationService },
+        { provide: SessionIdleTimerService, useClass: MockSessionIdleTimerService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: UserPreferenceService, useClass: MockUserPreferenceService },
       ],
       declarations: [SideNavTasksTaskViewComponent],
     })

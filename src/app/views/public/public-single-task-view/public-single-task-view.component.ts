@@ -1,7 +1,7 @@
-import {AsyncPipe} from '@angular/common';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HeaderComponent} from '@netgrif/components';
+import { AsyncPipe } from '@angular/common';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderComponent } from '@netgrif/components';
 import {
   AbstractSingleTaskViewComponent,
   AllowedNetsService,
@@ -43,22 +43,22 @@ import {
   UserService,
   ViewIdService,
 } from '@netgrif/components-core';
-import {TranslateService} from '@ngx-translate/core';
-import {combineLatest} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const taskResourceServiceFactory = (userService: UserService, sessionService: SessionService, authService: AuthenticationService,
-                                    router: Router, publicResolverService: PublicUrlResolverService,
-                                    logger: LoggerService, provider: ResourceProvider, config: ConfigurationService,
-                                    fieldConverter: FieldConverterService, redirectService: RedirectService) => {
+  router: Router, publicResolverService: PublicUrlResolverService,
+  logger: LoggerService, provider: ResourceProvider, config: ConfigurationService,
+  fieldConverter: FieldConverterService, redirectService: RedirectService) => {
   return publicFactoryResolver(userService, sessionService, authService, router, publicResolverService,
     new TaskResourceService(provider, config, fieldConverter, logger),
     new PublicTaskResourceService(provider, config, fieldConverter, logger), redirectService);
 };
 
 const processServiceFactory = (userService: UserService, sessionService: SessionService, authService: AuthenticationService,
-                               router: Router, publicResolverService: PublicUrlResolverService, petriNetResource: PetriNetResourceService,
-                               publicPetriNetResource: PublicPetriNetResourceService, loggerService: LoggerService, redirectService: RedirectService) => {
+  router: Router, publicResolverService: PublicUrlResolverService, petriNetResource: PetriNetResourceService,
+  publicPetriNetResource: PublicPetriNetResourceService, loggerService: LoggerService, redirectService: RedirectService) => {
   return publicFactoryResolver(userService, sessionService, authService, router, publicResolverService,
     new ProcessService(petriNetResource, loggerService),
     new PublicProcessService(publicPetriNetResource, loggerService), redirectService);
@@ -73,8 +73,8 @@ const localAllowedNetsServiceFactory = (factory: AllowedNetsServiceFactory, rout
 };
 
 const caseResourceServiceFactory = (userService: UserService, sessionService: SessionService, authService: AuthenticationService,
-                                    router: Router, publicResolverService: PublicUrlResolverService,
-                                    provider: ResourceProvider, config: ConfigurationService, redirectService: RedirectService) => {
+  router: Router, publicResolverService: PublicUrlResolverService,
+  provider: ResourceProvider, config: ConfigurationService, redirectService: RedirectService) => {
   return publicFactoryResolver(userService, sessionService, authService, router, publicResolverService,
     new CaseResourceService(provider, config),
     new PublicCaseResourceService(provider, config), redirectService);
@@ -118,16 +118,16 @@ const caseResourceServiceFactory = (userService: UserService, sessionService: Se
       useFactory: localAllowedNetsServiceFactory,
       deps: [AllowedNetsServiceFactory, ActivatedRoute],
     },
-    {provide: NAE_VIEW_ID_SEGMENT, useValue: 'publicSingleTaskView'},
-    {provide: AllowedNetsServiceFactory, useClass: AllowedNetsServiceFactory},
+    { provide: NAE_VIEW_ID_SEGMENT, useValue: 'publicSingleTaskView' },
+    { provide: AllowedNetsServiceFactory, useClass: AllowedNetsServiceFactory },
     ViewIdService,
-    {provide: TaskContentService, useClass: SingleTaskContentService},
+    { provide: TaskContentService, useClass: SingleTaskContentService },
     TaskDataService,
     FinishTaskService,
     TaskRequestStateService,
     TaskEventService,
-    {provide: NAE_TASK_OPERATIONS, useClass: SubjectTaskOperations},
-    {provide: AllowedNetsServiceFactory, useClass: AllowedNetsServiceFactory},
+    { provide: NAE_TASK_OPERATIONS, useClass: SubjectTaskOperations },
+    { provide: AllowedNetsServiceFactory, useClass: AllowedNetsServiceFactory },
     AsyncPipe,
   ],
 })
@@ -141,7 +141,7 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
   hidden: boolean;
 
   constructor(taskViewService: TaskViewService, publicTaskLoadingService: PublicTaskLoadingService,
-              activatedRoute: ActivatedRoute, config: ConfigurationService, protected _router: Router, async: AsyncPipe) {
+    activatedRoute: ActivatedRoute, config: ConfigurationService, protected _router: Router, async: AsyncPipe) {
     super(taskViewService, activatedRoute, async);
     this.hidden = true;
     this.loading$ = combineLatest([taskViewService.loading$, publicTaskLoadingService.loading$]).pipe(
@@ -150,6 +150,9 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
       }),
     );
     const view = config.getViewByPath('public-view-single-task');
+    if( view === undefined){
+      return;
+    }
     this.enablePageHeader = view.layout.params.enableHeader;
     this.enablePageFooter = view.layout.params.enableFooter;
     this.enableFinishButton = view.layout.params.enableFinishButton;
@@ -161,8 +164,6 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
 
   ngAfterViewInit(): void {
     this.initializeHeader(this.taskHeaderComponent);
-    //this.noTaskPresent.subscribe(() => this._router.navigate(['process', btoa('nae_1823')]))
-
     const enableHeader = this._activatedRoute.snapshot.queryParams['header'];
     const enableFooter = this._activatedRoute.snapshot.queryParams['footer'];
     const enableFinishBtn = this._activatedRoute.snapshot.queryParams['finishBtn'];
@@ -172,12 +173,8 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
     this.enableFinishButton = !(enableFinishBtn === false || enableFinishBtn === 'false');
   }
 
-  logEvent(event: TaskEventNotification) {
-    //console.log(event);
-  }
+  logEvent(event: TaskEventNotification) { }
 
-  newCase() {
-    //this._router.navigate(['process', btoa('nae_1823')])
-  }
+  newCase() { }
 
 }

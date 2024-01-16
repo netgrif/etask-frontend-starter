@@ -14,17 +14,11 @@ export class AppComponent {
   title = 'etask';
 
 
-  constructor(private _languageService: LanguageService, private routingBuilder: RoutingBuilderService,
-              private auth: AuthenticationService,
+  constructor(private routingBuilder: RoutingBuilderService,
               private _translate: TranslateService) {
 
     this._translate.setTranslation('sk-SK', sk, true);
     this._translate.setTranslation('en-US', en, true);
     this._translate.setTranslation('de-DE', de, true);
-    this._languageService.setLanguage('sk-SK');
-  }
-
-  isAuthenticated(): boolean {
-    return this.auth.isAuthenticated;
   }
 }

@@ -54,7 +54,6 @@ import {PublicTaskViewComponent} from './views/public/public-task-view/public-ta
 import {PublicWorkflowViewComponent} from './views/public/public-workflow-view/public-workflow-view.component';
 import {ETaskTaskResourceService} from './views/public/service/e-task-task-resource.service';
 import {SideNavCasesCaseViewComponent} from './views/side-nav/cases/side-nav-cases-case-view.component';
-import {EmptyViewComponent} from './views/side-nav/emptyView/empty-view.component';
 import {ETaskDoubleDrawerComponent} from './views/side-nav/etask-double-drawer/e-task-double-drawer.component';
 import {
   EtaskGroupNavigationComponentResolverService,
@@ -64,6 +63,8 @@ import {EtaskTabViewComponent} from './views/side-nav/tab-view/etask-tab-view.co
 import {SideNavTasksTaskViewComponent} from './views/side-nav/tasks/side-nav-tasks-task-view.component';
 import {WorkflowPanelComponent} from './views/workflow/workflow-panel/workflow-panel.component';
 import {WorkflowViewComponent} from './views/workflow/workflow-view/workflow-view.component';
+import { EtaskSingleTaskContentService } from './views/task-content/services/etask-single-task-content.service';
+import { EtaskUriService } from './views/dashboard/service/etask-uri.service';
 
 
 @NgModule({
@@ -74,7 +75,6 @@ import {WorkflowViewComponent} from './views/workflow/workflow-view/workflow-vie
     SidenavComponent,
     SideNavCasesCaseViewComponent,
     SideNavTasksTaskViewComponent,
-    EmptyViewComponent,
     DashboardComponent,
     PublicResolverComponent,
     PublicTaskViewComponent,
@@ -115,7 +115,6 @@ import {WorkflowViewComponent} from './views/workflow/workflow-view/workflow-vie
     UserComponentModule,
     PieChartModule,
     CommonModule,
-    MaterialModule,
     SideMenuContentComponentModule,
     HeaderComponentModule,
     PanelComponentModule,

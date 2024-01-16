@@ -56,13 +56,7 @@ export class SideNavCasesCaseViewComponent extends AbstractCaseViewComponent imp
   @ViewChild('header') public caseHeaderComponent: HeaderComponent;
 
   constructor(caseViewService: CaseViewService) {
-    super(caseViewService, undefined, undefined,
-      //  ,
-      // {
-      // enableCaseTitle: ,
-      // isCaseTitleRequired:
-      // }
-    );
+    super(caseViewService, undefined, undefined);
   }
 
   ngAfterViewInit(): void {

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this._userService.user.id.length !== 0) {
+    if ( this._userService.user && this._userService.user.id.length !== 0) {
       this.redirectToHome();
     }
   }

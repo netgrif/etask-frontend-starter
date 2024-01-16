@@ -9,7 +9,9 @@ import {
 } from '@netgrif/components-core';
 import {TranslateService} from '@ngx-translate/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class EtaskSingleTaskContentService extends SingleTaskContentService {
 
   private static readonly SNACKBAR_WARN_FRONTEND_ACTION = 'SNACKBAR_WARN';

@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {
   ActiveGroupService,
   CaseResourceService,
   LoggerService,
+  NAE_URI_NODE_CASES_PAGE_SIZE,
   UriNodeResource,
   UriService,
   UserService,
@@ -21,9 +22,9 @@ export class EtaskUriService extends UriService {
               _logger: LoggerService,
               _resourceService: EtaskUriResourceService,
               _caseResourceService: CaseResourceService,
-              _activeGroupService: ActiveGroupService) {
-    // TODO load page size from injection token
-    super(_logger, _resourceService, _caseResourceService, _activeGroupService, 100);
+              _activeGroupService: ActiveGroupService,
+              @Optional() @Inject(NAE_URI_NODE_CASES_PAGE_SIZE) protected pageSize: string | number) {
+    super(_logger, _resourceService, _caseResourceService, _activeGroupService, pageSize);
     this._counters = new Map<string, number>();
   }
 

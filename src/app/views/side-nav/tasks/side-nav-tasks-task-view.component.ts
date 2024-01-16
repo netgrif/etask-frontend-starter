@@ -17,7 +17,7 @@ import {
 } from '@netgrif/components-core';
 
 const localAllowedNetsFactory = (factory: AllowedNetsServiceFactory) => {
-  return factory.createFromConfig('side-nav/tasks');
+  return factory.createWithAllNets();
 };
 
 const baseFilterFactory = () => {

@@ -9,7 +9,6 @@ import {PublicSingleTaskViewComponent} from './views/public/public-single-task-v
 import {PublicTaskViewComponent} from './views/public/public-task-view/public-task-view.component';
 import {PublicWorkflowViewComponent} from './views/public/public-workflow-view/public-workflow-view.component';
 import {SideNavCasesCaseViewComponent} from './views/side-nav/cases/side-nav-cases-case-view.component';
-import {EmptyViewComponent} from './views/side-nav/emptyView/empty-view.component';
 import {SidenavComponent} from './views/side-nav/sidenav.component';
 import {SideNavTasksTaskViewComponent} from './views/side-nav/tasks/side-nav-tasks-task-view.component';
 import {WorkflowViewComponent} from './views/workflow/workflow-view/workflow-view.component';
@@ -24,7 +23,6 @@ export class EtaskFrontendViewService extends ViewService {
     // If you want to add views to the application run the 'create-view' schematic.
     super([{id: 'RoleAssignmentComponent', class: RoleAssignmentComponent},
       {id: 'WorkflowViewComponent', class: WorkflowViewComponent},
-      {id: 'EmptyViewComponent', class: EmptyViewComponent},
       {id: 'SideNavTasksTaskViewComponent', class: SideNavTasksTaskViewComponent},
       {id: 'SideNavCasesCaseViewComponent', class: SideNavCasesCaseViewComponent},
       {id: 'SidenavComponent', class: SidenavComponent},

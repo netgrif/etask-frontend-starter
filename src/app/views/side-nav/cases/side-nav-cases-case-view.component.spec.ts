@@ -5,14 +5,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HeaderComponentModule} from '@netgrif/components';
 import {
   AuthenticationMethodService,
-  CaseHeaderService,
   ConfigurationService,
   MaterialModule,
   MockAuthenticationMethodService,
+  MockUserPreferenceService,
+  MockUserService,
   NAE_TAB_DATA,
+  SessionIdleTimerService,
+  TestConfigurationService,
+  UserPreferenceService,
+  UserService,
 } from '@netgrif/components-core';
-import {EtaskFrontendConfigurationService} from '../../../etask-frontend-configuration.service';
 import {SideNavCasesCaseViewComponent} from './side-nav-cases-case-view.component';
+import { MockSessionIdleTimerService } from '../../dashboard/service/mock-session-idle-timer.service';
 
 describe('SideNavCasesCaseViewComponent', () => {
   let component: SideNavCasesCaseViewComponent;
@@ -27,10 +32,12 @@ describe('SideNavCasesCaseViewComponent', () => {
         BrowserAnimationsModule,
       ],
       providers: [
+        {provide: UserService, useClass: MockUserService},
+        {provide: UserPreferenceService, useClass: MockUserPreferenceService},
         {provide: AuthenticationMethodService, useClass: MockAuthenticationMethodService},
         {provide: NAE_TAB_DATA, useValue: {tabViewComponent: undefined, tabViewOrder: 1}},
-        {provide: ConfigurationService, useClass: EtaskFrontendConfigurationService},
-        CaseHeaderService,
+        {provide: ConfigurationService, useClass: TestConfigurationService},
+        {provide: SessionIdleTimerService, useClass: MockSessionIdleTimerService}
       ],
       declarations: [SideNavCasesCaseViewComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

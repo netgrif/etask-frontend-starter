@@ -63,8 +63,6 @@ import {EtaskTabViewComponent} from './views/side-nav/tab-view/etask-tab-view.co
 import {SideNavTasksTaskViewComponent} from './views/side-nav/tasks/side-nav-tasks-task-view.component';
 import {WorkflowPanelComponent} from './views/workflow/workflow-panel/workflow-panel.component';
 import {WorkflowViewComponent} from './views/workflow/workflow-view/workflow-view.component';
-import { EtaskSingleTaskContentService } from './views/task-content/services/etask-single-task-content.service';
-import { EtaskUriService } from './views/dashboard/service/etask-uri.service';
 
 
 @NgModule({

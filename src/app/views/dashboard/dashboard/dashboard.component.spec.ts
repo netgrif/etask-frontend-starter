@@ -20,7 +20,7 @@ import {DashboardComponent} from './dashboard.component';
 import { EtaskUriService } from '../service/etask-uri.service';
 import { MockUriResourceService } from '../service/mock-uri-resource.service';
 
-xdescribe('DashboardComponent', () => {
+describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 

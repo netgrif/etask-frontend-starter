@@ -35,14 +35,14 @@
              [routerLink]="profileRouterLink" routerLinkActive="active-tree-node">
           <mat-icon class="margin-auto" fxFlex>face</mat-icon>
           <div class="large-menu-item" fxLayout="column" fxFlexAlign="start center" fxFlex>
-                        <span *ngIf="!user.isImpersonating()" class="large-menu-item-text"
+                        <span *ngIf="!user?.isImpersonating()" class="large-menu-item-text"
                               fxFlex="50">{{ user.fullName }}</span>
-            <span *ngIf="user.isImpersonating()" class="large-menu-item-text" fxFlex="50">{{ user.fullName }}
+            <span *ngIf="user?.isImpersonating()" class="large-menu-item-text" fxFlex="50">{{ user.fullName }}
               ({{ user.getSelfOrImpersonated().fullName }})</span>
             <span class="large-menu-item-text" style="font-size: 12px;" fxFlex="50">{{ user.email }}</span>
           </div>
         </div>
-        <button *ngIf="includeImpersonation && !user.isImpersonating()" mat-menu-item (click)="impersonate()">
+        <button *ngIf="includeImpersonation && !user?.isImpersonating()" mat-menu-item (click)="impersonate()">
           <mat-icon>supervisor_account</mat-icon>
           <span>{{ 'side-menu.impersonation.submit' | translate }}</span>
         </button>

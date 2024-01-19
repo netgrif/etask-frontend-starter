@@ -7,12 +7,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateService } from '@ngx-translate/core';
 
-xdescribe('EtaskSingleTaskContentService', () => {
+describe('EtaskSingleTaskContentService', () => {
   let service: EtaskSingleTaskContentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EtaskSingleTaskContentService],
       imports: [
         NoopAnimationsModule,
         MatSnackBarModule,
@@ -20,6 +19,7 @@ xdescribe('EtaskSingleTaskContentService', () => {
         HttpClientTestingModule
       ], providers: [
         TranslateService,
+        EtaskSingleTaskContentService,
         { provide: ConfigurationService, useClass: TestConfigurationService }
       ]
     });

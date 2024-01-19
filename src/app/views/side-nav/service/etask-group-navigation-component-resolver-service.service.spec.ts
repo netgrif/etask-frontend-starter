@@ -5,7 +5,7 @@ import { EtaskGroupNavigationComponentResolverService } from './etask-group-navi
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-xdescribe('EtaskGroupNavigationComponentResolverService', () => {
+describe('EtaskGroupNavigationComponentResolverService', () => {
   let service: EtaskGroupNavigationComponentResolverService;
 
   beforeEach(() => {

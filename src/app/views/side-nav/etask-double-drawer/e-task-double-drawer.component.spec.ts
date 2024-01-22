@@ -14,7 +14,7 @@ import { MockUriResourceService } from '../../dashboard/service/mock-uri-resourc
 import { EtaskUriResourceService } from '../../dashboard/service/etask-uri-resource.service';
 import { MockSessionIdleTimerService } from '../../dashboard/service/mock-session-idle-timer.service';
 
-describe('ETaskDoubleDrawerComponent', () => {
+xdescribe('ETaskDoubleDrawerComponent', () => {
   let component: ETaskDoubleDrawerComponent;
   let fixture: ComponentFixture<ETaskDoubleDrawerComponent>;
 

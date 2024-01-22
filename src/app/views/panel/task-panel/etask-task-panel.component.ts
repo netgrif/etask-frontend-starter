@@ -13,7 +13,9 @@ import {
   DisableButtonFuntions,
   FinishPolicyService,
   FinishTaskService,
+  InjectedTabData,
   LoggerService,
+  NAE_TAB_DATA,
   NAE_TASK_OPERATIONS,
   NAE_TASK_PANEL_DISABLE_BUTTON_FUNCTIONS,
   OverflowService,
@@ -27,14 +29,12 @@ import {
   TaskViewService,
 } from '@netgrif/components-core';
 import {TranslateService} from '@ngx-translate/core';
-import {EtaskSingleTaskContentService} from '../../task-content/services/etask-single-task-content.service';
 
 @Component({
   selector: 'app-etask-task-panel',
   templateUrl: './etask-task-panel.component.html',
   styleUrls: ['./etask-task-panel.component.scss'],
   providers: [
-    {provide: TaskContentService, useClass: EtaskSingleTaskContentService},
     TaskDataService,
     TaskEventService,
     AssignTaskService,
@@ -73,9 +73,10 @@ export class EtaskTaskPanelComponent extends TaskPanelComponent {
               currencyPipe: CurrencyPipe,
               changedFieldsService: ChangedFieldsService,
               permissionService: PermissionService,
-              @Optional() overflowService: OverflowService) {
+              @Optional() overflowService: OverflowService,
+              @Optional() @Inject(NAE_TAB_DATA) injectedTabData: InjectedTabData) {
     super(taskContentService, log, taskViewService, paperView, taskEventService, assignTaskService, delegateTaskService, cancelTaskService, finishTaskService,
       taskState, taskDataService, assignPolicyService, finishPolicyService, callChain, translate, taskOperations, disableFunctions, isEnabled, parentInjector, currencyPipe,
-      changedFieldsService, permissionService, overflowService, false);
+      changedFieldsService, permissionService, overflowService, false, injectedTabData);
   }
 }

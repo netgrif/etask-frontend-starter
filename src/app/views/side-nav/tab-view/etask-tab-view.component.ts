@@ -1,6 +1,6 @@
-import {Component, Inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DefaultTabbedCaseViewComponent, DefaultTabbedTaskViewComponent} from '@netgrif/components';
+import { Component, Inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DefaultTabbedCaseViewComponent, DefaultTabbedTaskViewComponent } from '@netgrif/components';
 import {
   DataGroup,
   extractIconAndTitle,
@@ -11,6 +11,7 @@ import {
   TabContent,
   ViewIdService,
 } from '@netgrif/components-core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -19,7 +20,7 @@ import {
   styleUrls: ['./etask-tab-view.component.scss'],
   providers: [
     ViewIdService,
-    {provide: NAE_VIEW_ID_SEGMENT, useFactory: groupNavigationViewIdSegmentFactory, deps: [ActivatedRoute]},
+    { provide: NAE_VIEW_ID_SEGMENT, useFactory: groupNavigationViewIdSegmentFactory, deps: [ActivatedRoute] },
   ],
 })
 export class EtaskTabViewComponent {
@@ -28,9 +29,10 @@ export class EtaskTabViewComponent {
   tabs: Array<TabContent>;
 
   constructor(
+    private _translateService: TranslateService,
     @Inject(NAE_NAVIGATION_ITEM_TASK_DATA) protected _navigationItemTaskData: Array<DataGroup>,
     @Inject(NAE_VIEW_ID_SEGMENT) protected _viewIdSegment: string) {
-    const labelData = extractIconAndTitle(this._navigationItemTaskData);
+    const labelData = extractIconAndTitle(this._navigationItemTaskData, _translateService);
     const createCaseButtonTitle: string = _navigationItemTaskData[0]?.fields
       .find(field => field.stringId === 'create_case_button_title')?.value;
     const createCaseButtonIcon: string = _navigationItemTaskData[0].fields
@@ -53,7 +55,7 @@ export class EtaskTabViewComponent {
     };
     this.tabs = [
       {
-        label: {text: labelData.name, icon: labelData.icon},
+        label: { text: labelData.name, icon: labelData.icon },
         canBeClosed: false,
         tabContentComponent: DefaultTabbedCaseViewComponent,
         injectedObject: {

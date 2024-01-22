@@ -1,5 +1,5 @@
 import {AsyncPipe} from '@angular/common';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HeaderComponent} from '@netgrif/components';
 import {
@@ -7,6 +7,7 @@ import {
   AllowedNetsService,
   AllowedNetsServiceFactory,
   AuthenticationService,
+  BaseFilter,
   CaseResourceService,
   ChangedFieldsService,
   ConfigurationService,
@@ -141,8 +142,9 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
   hidden: boolean;
 
   constructor(taskViewService: TaskViewService, publicTaskLoadingService: PublicTaskLoadingService,
-              activatedRoute: ActivatedRoute, config: ConfigurationService, protected _router: Router, async: AsyncPipe) {
-    super(taskViewService, activatedRoute, async);
+              activatedRoute: ActivatedRoute, config: ConfigurationService, protected _router: Router,
+              @Inject(NAE_BASE_FILTER) baseFilter: BaseFilter) {
+    super(taskViewService, activatedRoute, baseFilter);
     this.hidden = true;
     this.loading$ = combineLatest([taskViewService.loading$, publicTaskLoadingService.loading$]).pipe(
       map(sources => {
@@ -161,7 +163,6 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
 
   ngAfterViewInit(): void {
     this.initializeHeader(this.taskHeaderComponent);
-    //this.noTaskPresent.subscribe(() => this._router.navigate(['process', btoa('nae_1823')]))
 
     const enableHeader = this._activatedRoute.snapshot.queryParams['header'];
     const enableFooter = this._activatedRoute.snapshot.queryParams['footer'];
@@ -173,11 +174,9 @@ export class PublicSingleTaskViewComponent extends AbstractSingleTaskViewCompone
   }
 
   logEvent(event: TaskEventNotification) {
-    //console.log(event);
+    console.log(event);
   }
 
-  newCase() {
-    //this._router.navigate(['process', btoa('nae_1823')])
-  }
+  newCase() {}
 
 }

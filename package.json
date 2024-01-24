@@ -1,6 +1,6 @@
 {
   "name": "etask-frontend",
-  "version": "1.1.0-rc.1",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration development",

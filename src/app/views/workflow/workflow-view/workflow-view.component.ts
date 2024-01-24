@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {ImportNetComponent} from '@netgrif/components';
+import {ImportNetDialogComponent} from '@netgrif/components';
 import {
   AbstractWorkflowViewComponent,
   LoggerService,
   ProcessService,
-  SideMenuService,
   WorkflowViewService,
 } from '@netgrif/components-core';
 
@@ -26,6 +25,6 @@ export class WorkflowViewComponent extends AbstractWorkflowViewComponent {
   }
 
   public importNet() {
-    this.importSidemenuNet(ImportNetComponent);
+    this.importSidemenuNet(ImportNetDialogComponent);
   }
 }

@@ -4,15 +4,13 @@ import {
   AccessService,
   Case,
   DynamicNavigationRouteProviderService,
-  FILTER_IDENTIFIERS,
-  FILTER_VIEW_TASK_TRANSITION_ID,
   FilterExtractionService,
   LoadingEmitter,
+  MENU_IDENTIFIERS,
+  NavigationItem,
   RoleAccess,
   TaskResourceService,
-  User,
-  UserService,
-  ViewNavigationItem,
+  User,  UserService,
 } from '@netgrif/components-core';
 import {Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -30,7 +28,7 @@ import {EtaskUriService} from '../service/etask-uri.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   public nodes: Array<ETaskUriNodeResource> = [];
 
-  public customViews: Array<ViewNavigationItem> = [];
+  public customViews: Array<NavigationItem> = [];
   protected _counters: Map<string, number> = new Map<string, number>();
 
   private _sub: Subscription;
@@ -59,12 +57,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this._loading.off();
         });
 
-        this._uri.getCasesOfNode(this._uri.root, FILTER_IDENTIFIERS).pipe(
+        this._uri.getCasesOfNode(this._uri.root, MENU_IDENTIFIERS).pipe(
           map(cases => {
             const filteredViews = cases
               .content.filter(it => custom_views.includes(it.immediateData.find(f => f.stringId === 'menu_item_identifier')?.value))
               .sort((a, b) => this.getViewOrder(a) - this.getViewOrder(b));
-            return filteredViews.map(it => this.resolveFilterCaseToViewNavigationItem(it)).filter(it => !!it);
+            return filteredViews.map(it => this.resolveFilterCaseToNavigationItem(it)).filter(it => !!it);
           }),
         ).subscribe(views => {
           this.customViews = views;
@@ -92,11 +90,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   /* custom views */
-  public countView(view: ViewNavigationItem) {
+  public countView(view: NavigationItem) {
     return this.isCountLoaded(view) ? this._counters.get(view.id) : 0;
   }
 
-  public isCountLoaded(view: ViewNavigationItem) {
+  public isCountLoaded(view: NavigationItem) {
     return this._counters.has(view.id);
   }
 
@@ -104,12 +102,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return !this._loading.getValue();
   }
 
-  public getCountForViews(customViews: Array<ViewNavigationItem>) {
+  public getCountForViews(customViews: Array<NavigationItem>) {
     if (!customViews) {
       return;
     }
     customViews.forEach(view => {
-      const taskId = view.resource.tasks.find(taskPair => taskPair.transition === FILTER_VIEW_TASK_TRANSITION_ID).task;
+      const taskId = view.resource.tasks.find(taskPair => taskPair.transition === "view").task;
       this._taskResource.getData(taskId).subscribe(taskData => {
         const filter = this._filterExtraction.extractCompleteFilterFromData(taskData);
         this._taskResource.count(filter).subscribe(count => {
@@ -119,7 +117,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  public openView(view: ViewNavigationItem) {
+  public openView(view: NavigationItem) {
     this._uri.activeNode = this._uri.root;
     this._router.navigate([view.routing.path]);
   }
@@ -145,8 +143,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   /* from AbstractNavigationDoubleDrawerComponent */
-  protected resolveFilterCaseToViewNavigationItem(filter: Case): ViewNavigationItem | undefined {
-    const item: ViewNavigationItem = {
+  protected resolveFilterCaseToNavigationItem(filter: Case): NavigationItem | undefined {
+    const item: NavigationItem = {
       access: {},
       navigation: {
         icon: filter.immediateData.find(f => f.stringId === 'icon_name')?.value,
@@ -168,7 +166,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   /* from AbstractNavigationDoubleDrawerComponent */
   protected getFilterRoutingPath(filterCase: Case) {
-    const viewTaskId = filterCase.tasks.find(taskPair => taskPair.transition === FILTER_VIEW_TASK_TRANSITION_ID).task;
+    const viewTaskId = filterCase.tasks.find(taskPair => taskPair.transition === "view").task;
     const url = this._dynamicRoutingService.route;
     return `/${url}/${viewTaskId}`;
   }

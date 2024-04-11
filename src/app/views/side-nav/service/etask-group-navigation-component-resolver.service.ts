@@ -1,5 +1,5 @@
 import {Injectable, Type} from '@angular/core';
-import {DefaultSimpleTaskViewComponent} from '@netgrif/components';
+import {DefaultSimpleTaskViewComponent, DefaultTabViewComponent} from '@netgrif/components';
 import {
   DataGroup,
   extractFilterFromData,
@@ -8,7 +8,6 @@ import {
   LoggerService,
   TaskResourceService,
 } from '@netgrif/components-core';
-import {EtaskTabViewComponent} from '../tab-view/etask-tab-view.component';
 
 @Injectable()
 export class EtaskGroupNavigationComponentResolverService extends GroupNavigationComponentResolverService {
@@ -26,7 +25,7 @@ export class EtaskGroupNavigationComponentResolverService extends GroupNavigatio
 
     switch (filter.type) {
       case FilterType.CASE:
-        return EtaskTabViewComponent;
+        return DefaultTabViewComponent;
       case FilterType.TASK:
         return DefaultSimpleTaskViewComponent;
       default:

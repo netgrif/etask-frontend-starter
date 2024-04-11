@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AbstractWorkflowViewComponent,
   AuthenticationService,
@@ -15,22 +16,21 @@ import {
   RedirectService,
   ResourceProvider,
   SessionService,
-  SideMenuService,
   UserService,
   WorkflowViewService,
 } from '@netgrif/components-core';
 
 const processServiceFactory = (userService: UserService, sessionService: SessionService, authService: AuthenticationService,
-                               router: Router, publicResolverService: PublicUrlResolverService, petriNetResource: PetriNetResourceService,
-                               publicPetriNetResource: PublicPetriNetResourceService, loggerService: LoggerService, redirectService: RedirectService) => {
+  router: Router, publicResolverService: PublicUrlResolverService, petriNetResource: PetriNetResourceService,
+  publicPetriNetResource: PublicPetriNetResourceService, loggerService: LoggerService, redirectService: RedirectService) => {
   return publicFactoryResolver(userService, sessionService, authService, router, publicResolverService,
     new ProcessService(petriNetResource, loggerService),
     new PublicProcessService(publicPetriNetResource, loggerService), redirectService);
 };
 
 const petriNetResourceFactory = (userService: UserService, sessionService: SessionService, authService: AuthenticationService,
-                                 router: Router, publicResolverService: PublicUrlResolverService, provider: ResourceProvider,
-                                 config: ConfigurationService, redirectService: RedirectService) => {
+  router: Router, publicResolverService: PublicUrlResolverService, provider: ResourceProvider,
+  config: ConfigurationService, redirectService: RedirectService) => {
   return publicFactoryResolver(userService, sessionService, authService, router, publicResolverService,
     new PetriNetResourceService(provider, config),
     new PublicPetriNetResourceService(provider, config), redirectService);
@@ -57,13 +57,14 @@ const petriNetResourceFactory = (userService: UserService, sessionService: Sessi
   ],
 })
 export class PublicWorkflowViewComponent extends AbstractWorkflowViewComponent {
-  constructor(protected _sideMenuService: SideMenuService,
-              protected _workflowViewService: WorkflowViewService,
-              protected _log: LoggerService,
-              protected _processService: ProcessService,
-              protected _router: Router,
-              protected _route: ActivatedRoute) {
-    super(_sideMenuService, _workflowViewService, _log, _processService);
+  constructor(
+    protected _dialog: MatDialog,
+    protected _workflowViewService: WorkflowViewService,
+    protected _log: LoggerService,
+    protected _processService: ProcessService,
+    protected _router: Router,
+    protected _route: ActivatedRoute) {
+    super(_dialog, _workflowViewService, _log, _processService, _route);
   }
 
   handleClick(workflow: Net) {

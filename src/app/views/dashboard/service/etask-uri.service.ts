@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ActiveGroupService,
   CaseResourceService,
@@ -7,8 +7,8 @@ import {
   UriService,
   UserService,
 } from '@netgrif/components-core';
-import {Observable, Subject} from 'rxjs';
-import {ETaskUriNodeResource, EtaskUriResourceService} from './etask-uri-resource.service';
+import { Observable, Subject } from 'rxjs';
+import { ETaskUriNodeResource, EtaskUriResourceService } from './etask-uri-resource.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +18,10 @@ export class EtaskUriService extends UriService {
   protected _counters: Map<string, number>;
 
   constructor(protected userService: UserService,
-              _logger: LoggerService,
-              _resourceService: EtaskUriResourceService,
-              _caseResourceService: CaseResourceService,
-              _activeGroupService: ActiveGroupService) {
+    _logger: LoggerService,
+    _resourceService: EtaskUriResourceService,
+    _caseResourceService: CaseResourceService,
+    _activeGroupService: ActiveGroupService) {
     // TODO load page size from injection token
     super(_logger, _resourceService, _caseResourceService, _activeGroupService, 100);
     this._counters = new Map<string, number>();

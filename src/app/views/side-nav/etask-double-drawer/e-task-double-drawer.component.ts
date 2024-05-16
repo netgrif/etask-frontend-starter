@@ -15,8 +15,6 @@ import {
   LoggerService,
   MenuOrder,
   NavigationItem,
-  UriNodeResource,
-  UriService,
   UserService,
 } from '@netgrif/components-core';
 import {EtaskUriService} from '../../dashboard/service/etask-uri.service';
@@ -64,13 +62,12 @@ export class ETaskDoubleDrawerComponent extends NavigationDoubleDrawerComponent 
               accessService: AccessService,
               log: LoggerService,
               config: ConfigurationService,
-              uriService: UriService,
               caseResourceService: CaseResourceService,
               impersonationUserSelect: ImpersonationUserSelectService,
               impersonation: ImpersonationService,
-              private _customUri: EtaskUriService,
+              customUri: EtaskUriService,
               dynamicRouteProviderService: DynamicNavigationRouteProviderService) {
-    super(router, activatedRoute, breakpoint, languageService, translateService, userService, accessService, log, config, uriService,
+    super(router, activatedRoute, breakpoint, languageService, translateService, userService, accessService, log, config, customUri,
       caseResourceService, impersonationUserSelect, impersonation, dynamicRouteProviderService);
     this._impersonation.impersonating$.subscribe(() => {
       this._router.navigate(['dashboard']);
